@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Professional Resume · Priyadharshini</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at 30% 30%, #d9e6f2, #b3cde0); /* soft pastel blue gradient */
+      padding: 20px;
+    }
+
+    /* main card – open, clean, minimal academic */
+    .presentation-container {
+      width: 1000px;
+      max-width: 95%;
+      background: rgba(255, 255, 255, 0.4);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 42px;
+      box-shadow: 0 20px 40px -10px rgba(0, 40, 80, 0.25), inset 0 1px 2px rgba(255,255,255,0.6);
+      padding: 30px 30px 40px 30px;
+      border: 1px solid rgba(255,255,255,0.7);
+    }
+
+    /* gradient background inside – light lavender hint */
+    .slide-area {
+      background: linear-gradient(145deg, #eceff8, #f4f0fa); /* very light pastel lavender/blue */
+      border-radius: 32px;
+      padding: 32px 36px;
+      box-shadow: inset 0 2px 3px rgba(255,255,255,0.8), 0 8px 18px rgba(103, 126, 153, 0.15);
+      border: 1px solid rgba(255,255,255,0.9);
+    }
+
+    /* typography – professional academic serif for titles, clean sans for body */
+    h1, h2, h3 {
+      font-weight: 500;
+      letter-spacing: -0.02em;
+    }
+
+    h1 { font-size: 2.4rem; color: #1d2f4b; border-left: 8px solid #7289ae; padding-left: 28px; margin-bottom: 28px; font-weight: 450; }
+    h2 { font-size: 2rem; color: #1f3a5f; margin-bottom: 0.5rem; font-weight: 430; }
+    h3 { font-size: 1.6rem; color: #2b4a73; margin-bottom: 1.2rem; font-weight: 400; }
+
+    p, li, .content-text {
+      font-size: 1.3rem;
+      line-height: 1.6;
+      color: #162b42;
+      margin-bottom: 1rem;
+      font-weight: 350;
+    }
+
+    .professional-card {
+      background: rgba(255,255,255,0.5);
+      border-radius: 28px;
+      padding: 26px 32px;
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(255,255,255,0.5);
+    }
+
+    /* greeting row */
+    .greeting-box {
+      display: flex;
+      align-items: center;
+      gap: 35px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    .greeting-message {
+      font-size: 2.2rem;
+      color: #173e5f;
+      background: rgba(255,255,255,0.6);
+      padding: 14px 30px;
+      border-radius: 60px;
+      display: inline-block;
+      backdrop-filter: blur(4px);
+      font-weight: 380;
+    }
+
+    .option-group {
+      display: flex;
+      gap: 30px;
+    }
+
+    .option-btn {
+      background: rgba(255,255,255,0.75);
+      border: 1.5px solid #5b7a9a;
+      color: #173e5f;
+      padding: 12px 40px;
+      font-size: 1.6rem;
+      border-radius: 48px;
+      cursor: pointer;
+      font-weight: 500;
+      backdrop-filter: blur(4px);
+      transition: 0.2s;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    }
+
+    .option-btn:hover {
+      background: white;
+      border-color: #345e88;
+      box-shadow: 0 8px 16px rgba(43, 74, 115, 0.15);
+      transform: scale(1.02);
+    }
+
+    /* unlock question area */
+    .key-section {
+      margin: 30px 0 25px 0;
+      background: rgba(255,255,255,0.6);
+      border-radius: 50px;
+      padding: 22px 30px;
+      border: 1px solid white;
+    }
+
+    .question-text {
+      font-size: 1.5rem;
+      font-weight: 420;
+      color: #103450;
+      margin-bottom: 18px;
+    }
+
+    .options-row {
+      display: flex;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    .key-option {
+      background: white;
+      border: 1px solid #a0b9cf;
+      padding: 12px 36px;
+      border-radius: 40px;
+      font-size: 1.4rem;
+      color: #103450;
+      cursor: pointer;
+      transition: 0.15s;
+      font-weight: 400;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+
+    .key-option:hover {
+      background: #e2ecf7;
+      border-color: #5f8ab6;
+    }
+
+    .key-option.correct-highlight {
+      background: #b5d1f0;
+      border-color: #2e5f8a;
+      font-weight: 500;
+    }
+
+    .slide-content {
+      margin-top: 20px;
+      transition: opacity 0.2s ease;
+    }
+
+    .locked-message {
+      background: rgba(255,255,240,0.6);
+      border-radius: 40px;
+      padding: 30px;
+      text-align: center;
+      border: 2px dashed #99b5cf;
+      font-size: 1.5rem;
+      color: #234a6b;
+    }
+
+    /* unlock indicator */
+    .unlock-badge {
+      display: inline-block;
+      background: #1f4a6e;
+      color: white;
+      border-radius: 40px;
+      padding: 6px 22px;
+      font-size: 1.1rem;
+      letter-spacing: 0.5px;
+      margin-bottom: 18px;
+      text-transform: uppercase;
+    }
+
+    .footer-note {
+      margin-top: 28px;
+      font-size: 1.1rem;
+      color: #335e7e;
+      text-align: right;
+      border-top: 1px solid rgba(255,255,255,0.7);
+      padding-top: 16px;
+    }
+
+    /* hide elements */
+    .hidden {
+      display: none !important;
+    }
+
+    /* emoji are displayed but not spoken – fine */
+    .content-text span.emoji {
+      font-size: 1.3em;
+      margin-right: 4px;
+    }
+
+    /* slides container */
+    .slides-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+    .slide-card {
+      background: rgba(255,255,255,0.4);
+      border-radius: 36px;
+      padding: 22px 30px;
+      backdrop-filter: blur(4px);
+    }
+  </style>
+</head>
+<body>
+<div class="presentation-container" id="appContainer">
+  <div class="slide-area">
+    <!-- GREETING + YES/NO (always visible until Yes) -->
+    <div id="greetingPhase" class="">
+      <div class="greeting-box">
+        <div class="greeting-message">🤖 Welcome.</div>
+        <div class="option-group">
+          <div class="option-btn" id="btnYes">Yes</div>
+          <div class="option-btn" id="btnNo">No</div>
+        </div>
+      </div>
+      <div style="font-size: 1.2rem; color: #2d5270; margin-top: 8px;">Select ‘Yes’ to start the presentation</div>
+    </div>
+
+    <!-- MAIN PRESENTATION (hidden until Yes) -->
+    <div id="presentationArea" class="hidden">
+      <!-- unlock key area dynamic -->
+      <div id="unlockPanel" class="key-section">
+        <div class="question-text" id="currentQuestion">Loading ...</div>
+        <div class="options-row" id="keyOptionsContainer"></div>
+        <div id="keyFeedback" style="margin-top: 12px; font-style: italic; color: #1c5985;"></div>
+      </div>
+
+      <!-- SLIDES (they will be dynamically populated) -->
+      <div id="slidesContainer" class="slides-stack"></div>
+      <div class="footer-note">professional academic presentation · auto-narrated</div>
+    </div>
+
+    <!-- hidden audio for speech (will be used programmatically) -->
+    <audio id="speechAudio" style="display: none"></audio>
+  </div>
+</div>
+
+<script>
+  (function() {
+    // ----- CONFIG (from JSON) -----
+    const slidesData = [
+      {
+        title: "About Her 👩‍💻",
+        locked: true,
+        unlock_key: "resume_key_1",
+        content: "Priyadharshini is currently pursuing her undergraduate degree at Government College of Engineering, Salem 🎓. She aims to build a strong career in the Information Technology sector 💻. She is actively learning Generative Artificial Intelligence and AI development 🤖. She is dedicated, adaptable, and focused on continuous improvement and professional growth.",
+        speech_text: "Priyadharshini is currently pursuing her undergraduate degree at Government College of Engineering, Salem. She aims to build a strong career in the Information Technology sector. She is actively learning Generative Artificial Intelligence and AI development. She is dedicated, adaptable, and focused on continuous improvement and professional growth."
+      },
+      {
+        title: "Technical Skills 🛠️",
+        locked: true,
+        unlock_key: "resume_key_2",
+        content: "She has foundational knowledge in Python, C, and C++ 💻. She is capable of solving basic programming problems and correcting errors independently. She understands core programming concepts and is gradually strengthening her knowledge in Artificial Intelligence and embedded systems 📚.",
+        speech_text: "She has foundational knowledge in Python, C, and C++. She is capable of solving basic programming problems and correcting errors independently. She understands core programming concepts and is gradually strengthening her knowledge in Artificial Intelligence and embedded systems."
+      },
+      {
+        title: "Achievements 🏆",
+        locked: true,
+        unlock_key: "resume_key_3",
+        content: "She presented a technical paper at Government College of Technology, Coimbatore on Piezoelectric Roads 🛣️. She attended workshops on AI-enabled energy systems ⚡ and Embedded Systems with Internet of Things 🌐. She also completed hands-on training in measuring instruments at Government College of Engineering, Salem.",
+        speech_text: "She presented a technical paper at Government College of Technology, Coimbatore on Piezoelectric Roads. She attended workshops on AI-enabled energy systems and Embedded Systems with Internet of Things. She also completed hands-on training in measuring instruments at Government College of Engineering, Salem."
+      },
+      {
+        title: "Project Experience 🚀",
+        locked: true,
+        unlock_key: "resume_key_4",
+        content: "She is currently developing a project titled Wireless Jamming Detection using ESP32 📡. She has also completed a Conveyor Belt Jamming Detection system using sensors. These projects focus on real-time monitoring and practical embedded system applications. She has created her professional portfolio using DeepSeek 🌟.",
+        speech_text: "She is currently developing a project titled Wireless Jamming Detection using ESP32. She has also completed a Conveyor Belt Jamming Detection system using sensors. These projects focus on real-time monitoring and practical embedded system applications. She has created her professional portfolio using DeepSeek."
+      },
+      {
+        title: "Contact Information 📧",
+        locked: true,
+        unlock_key: "resume_key_5",
+        content: "Her email address is priyadharshiniumasankar008@gmail.com 📧. Her LinkedIn profile is: https://www.linkedin.com/in/priyadharshini-u-3184a4373 🔗",
+        speech_text: "Her email address is priyadharshiniumasankar008@gmail.com. Her LinkedIn profile is available online."
+      },
+      {
+        title: "Conclusion 🤝",
+        locked: true,
+        unlock_key: "resume_key_6",
+        content: "Thank you for your time and consideration.",
+        speech_text: "Thank you for your time and consideration."
+      }
+    ];
+
+    // key definitions (with questions/options)
+    const keys = [
+      { key_id: "resume_key_1", question: "What is Suno AI?", options: ["Music", "Video"], correct: "Music", speech_text: "Please answer the question to unlock the slide." },
+      { key_id: "resume_key_2", question: "What is Replit?", options: ["Web Development", "Music"], correct: "Web Development", speech_text: "Please answer the question to unlock the slide." },
+      { key_id: "resume_key_3", question: "What is ElevenLabs AI?", options: ["Video", "Voice Modify"], correct: "Voice Modify", speech_text: "Please answer the question to unlock the slide." },
+      { key_id: "resume_key_4", question: "What is Bolt?", options: ["Fullstack Development", "Video Making"], correct: "Fullstack Development", speech_text: "Please answer the question to unlock the slide." },
+      { key_id: "resume_key_5", question: "Email domain used?", options: ["gmail.com", "yahoo.com"], correct: "gmail.com", speech_text: "Verify contact access." },  // simple extra
+      { key_id: "resume_key_6", question: "Acknowledgment ?", options: ["Thank you", "Goodbye"], correct: "Thank you", speech_text: "Final unlock." }
+    ];
+
+    // settings
+    const audioSettings = {
+      speech_rate: "moderate",
+      clear_pronunciation: true,
+      ignore_emojis_in_audio: true,
+      complete_sentence_before_next: true,
+      pause_between_speakers_seconds: 2,
+      auto_slide_transition_after_narration: true
+    };
+
+    // state
+    let presentationActive = false;
+    let currentSlideIndex = 0; // which slide we are trying to unlock/show
+    let unlockedSlides = [];   // track unlocked slide indices
+
+    // DOM elements
+    const greetingPhase = document.getElementById('greetingPhase');
+    const presentationArea = document.getElementById('presentationArea');
+    const btnYes = document.getElementById('btnYes');
+    const btnNo = document.getElementById('btnNo');
+    const unlockPanel = document.getElementById('unlockPanel');
+    const currentQuestionEl = document.getElementById('currentQuestion');
+    const keyOptionsContainer = document.getElementById('keyOptionsContainer');
+    const keyFeedback = document.getElementById('keyFeedback');
+    const slidesContainer = document.getElementById('slidesContainer');
+    const speechAudio = document.getElementById('speechAudio');
+
+    // helpers
+    function speakText(text, callback) {
+      if (!window.speechSynthesis) {
+        console.warn("speechSynthesis unsupported");
+        if (callback) callback();
+        return;
+      }
+      // cancel any ongoing
+      window.speechSynthesis.cancel();
+
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.rate = 0.9; // moderate
+      utterance.pitch = 1.05;
+      utterance.volume = 1;
+      utterance.lang = 'en-US';
+      utterance.onend = function() {
+        if (callback) callback();
+      };
+      utterance.onerror = function() {
+        if (callback) callback();
+      };
+      window.speechSynthesis.speak(utterance);
+    }
+
+    // find key object by ID
+    function getKeyById(keyId) {
+      return keys.find(k => k.key_id === keyId);
+    }
+
+    // render all slides (locked/unlocked styles)
+    function renderSlides() {
+      let html = '';
+      slidesData.forEach((slide, idx) => {
+        const isUnlocked = unlockedSlides.includes(idx);
+        const lockedClass = isUnlocked ? '' : 'locked-message';
+        const titleEmoji = slide.title.replace(/[🏻🏼🏽🏾🏿]/, ''); // keep
+
+        if (isUnlocked) {
+          // show full content
+          html += `<div class="slide-card" data-slide-index="${idx}">
+            <div class="unlock-badge">🔓 UNLOCKED</div>
+            <h2>${slide.title}</h2>
+            <div class="content-text">${slide.content.replace(/\n/g, '<br>')}</div>
+          </div>`;
+        } else {
+          // locked style – show minimal, with lock icon
+          html += `<div class="slide-card" data-slide-index="${idx}">
+            <div style="display: flex; align-items: center; gap: 12px; opacity:0.9">
+              <span style="font-size:2rem;">🔒</span>
+              <h3 style="margin:0;">${slide.title}</h3>
+            </div>
+            <div class="locked-message" style="margin-top:12px;">Slide locked — answer the question above to view.</div>
+          </div>`;
+        }
+      });
+      slidesContainer.innerHTML = html;
+    }
+
+    // update unlock panel based on currentSlideIndex (first locked slide)
+    function updateUnlockPanel() {
+      // find first slide that is locked (index)
+      let targetIdx = -1;
+      for (let i = 0; i < slidesData.length; i++) {
+        if (!unlockedSlides.includes(i)) {
+          targetIdx = i;
+          break;
+        }
+      }
+
+      if (targetIdx === -1) {
+        // All slides unlocked: hide unlock panel or show congrats
+        unlockPanel.classList.add('hidden');
+        return;
+      }
+
+      unlockPanel.classList.remove('hidden');
+      const slide = slidesData[targetIdx];
+      const key = getKeyById(slide.unlock_key);
+      if (!key) return;
+
+      currentQuestionEl.textContent = key.question + '  🔑';
+      // render options
+      let optsHtml = '';
+      key.options.forEach(opt => {
+        optsHtml += `<div class="key-option" data-keyid="${key.key_id}" data-opt="${opt}">${opt}</div>`;
+      });
+      keyOptionsContainer.innerHTML = optsHtml;
+      keyFeedback.innerHTML = '';
+
+      // attach click listeners to options
+      document.querySelectorAll('.key-option').forEach(el => {
+        el.addEventListener('click', (e) => {
+          const chosen = el.getAttribute('data-opt');
+          const keyId = el.getAttribute('data-keyid');
+          const keyObj = keys.find(k => k.key_id === keyId);
+          if (!keyObj) return;
+
+          // check correctness
+          if (chosen === keyObj.correct) {
+            // unlock the corresponding slide
+            const slideIdx = slidesData.findIndex(s => s.unlock_key === keyId);
+            if (slideIdx !== -1 && !unlockedSlides.includes(slideIdx)) {
+              unlockedSlides.push(slideIdx);
+              // sort to keep order
+              unlockedSlides.sort((a,b) => a-b);
+              keyFeedback.innerHTML = '✅ Correct! Slide unlocked.';
+              // speak the slide's speech_text? but we also need auto narration after unlock.
+              renderSlides();
+
+              // Auto-narrate the newly unlocked slide's speech_text
+              const unlockedSlide = slidesData[slideIdx];
+              if (unlockedSlide && unlockedSlide.speech_text) {
+                // speak and after finishing, auto-transition if there's a next locked slide (wait 2 seconds?)
+                speakText(unlockedSlide.speech_text, () => {
+                  // after speech, if auto_slide_transition_after_narration true, we move to next locked slide
+                  if (audioSettings.auto_slide_transition_after_narration) {
+                    // wait a little for pause_between_speakers_seconds
+                    setTimeout(() => {
+                      updateUnlockPanel();  // refresh panel to next question
+                    }, audioSettings.pause_between_speakers_seconds * 1000);
+                  } else {
+                    updateUnlockPanel();
+                  }
+                });
+              } else {
+                // just update panel
+                updateUnlockPanel();
+              }
+
+              // also if all slides unlocked, hide panel
+              if (unlockedSlides.length === slidesData.length) {
+                unlockPanel.classList.add('hidden');
+              }
+            } else {
+              keyFeedback.innerHTML = '⚠️ Already unlocked?';
+            }
+          } else {
+            keyFeedback.innerHTML = '❌ Incorrect answer, try again.';
+          }
+        });
+      });
+    }
+
+    // function to start presentation after Yes
+    function startPresentation() {
+      presentationActive = true;
+      greetingPhase.classList.add('hidden');
+      presentationArea.classList.remove('hidden');
+
+      // reset state (if you want fresh)
+      unlockedSlides = [];
+      currentSlideIndex = 0;
+
+      renderSlides();
+      updateUnlockPanel();
+
+      // speak intro? The robot greeting already done, but we can speak something like 'please answer to unlock'
+      // first unlock question speech
+      const firstKey = keys.find(k => k.key_id === slidesData[0].unlock_key);
+      if (firstKey) {
+        speakText(firstKey.speech_text || 'Please answer the question to unlock the slide.', () => {});
+      }
+    }
+
+    // exit presentation on No
+    function exitPresentation() {
+      // simply hide presentation area and show greeting?
+      presentationArea.classList.add('hidden');
+      greetingPhase.classList.remove('hidden');
+      window.speechSynthesis.cancel();
+      // reset unlock
+      unlockedSlides = [];
+    }
+
+    // Event listeners for Yes/No
+    btnYes.addEventListener('click', () => {
+      startPresentation();
+    });
+
+    btnNo.addEventListener('click', () => {
+      exitPresentation();
+    });
+
+    // initial render (empty slides container, but greeting visible)
+    renderSlides(); // slides hidden because presentation inactive
+    // ensure unlock panel hidden at first because presentation inactive
+    unlockPanel.classList.add('hidden');
+  })();
+</script>
+</body>
+</html>
